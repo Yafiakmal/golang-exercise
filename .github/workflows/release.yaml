@@ -1,0 +1,35 @@
+name: Build and Release Go Binary
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24" # Ganti sesuai versi Go kamu
+
+      - name: Build Go Binary
+        run: |
+          mkdir dist
+          GOOS=linux GOARCH=amd64 go build -o dist/mdToHtml
+          # Tambahkan platform lain jika ingin
+          # GOOS=windows GOARCH=amd64 go build -o dist/myapp.exe
+          # GOOS=darwin GOARCH=amd64 go build -o dist/myapp-macos
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
