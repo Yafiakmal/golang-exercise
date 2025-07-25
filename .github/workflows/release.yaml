@@ -21,10 +21,7 @@ jobs:
       - name: Build Go Binary
         run: |
           mkdir dist
-          GOOS=linux GOARCH=amd64 go build -o dist/mdToHtml
-          # Tambahkan platform lain jika ingin
-          # GOOS=windows GOARCH=amd64 go build -o dist/myapp.exe
-          # GOOS=darwin GOARCH=amd64 go build -o dist/myapp-macos
+          GOOS=linux GOARCH=amd64 go build -o dist/mdToHtml ./mdToHtml
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
