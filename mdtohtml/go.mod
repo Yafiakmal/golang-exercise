@@ -1,4 +1,4 @@
-module app/mdtohtml
+module github.com/yafiakmal/mdToHtml
 
 go 1.24.2
 
